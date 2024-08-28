@@ -1,0 +1,26 @@
+name: Test Leapwork Action
+on:
+  push:
+    branches:
+      - main
+
+permissions: write-all
+
+jobs:
+  run-action:
+    name: Test with Leapwork
+    runs-on: self-hosted
+      environment:
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Call Leapwork GitHub Action
+        uses: leapwork/Github-action@v1.0
+        with:
+          leapworkApiUrl: ${{ vars.LEAPWORK_API_URL }}
+          leapworkApiKey: ${{ secrets.LEAPWORK_API_KEY }}
+          leapworkSchedule: ${{ vars.LEAPWORK_SCHEDULE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
